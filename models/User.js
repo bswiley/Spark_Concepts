@@ -35,6 +35,14 @@ User.init(
         len: [8],
       },
     },
+    favorite:{
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      references: {
+        model: 'concept',
+        key: 'id',
+      },
+    }
+    
     stat1: {
       type: DataTypes.STRING,
     },
