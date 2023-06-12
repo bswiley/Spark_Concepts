@@ -41,8 +41,7 @@ User.init(
         model: 'concept',
         key: 'id',
       },
-    }
-    
+    },
     stat1: {
       type: DataTypes.STRING,
     },

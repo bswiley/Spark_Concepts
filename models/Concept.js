@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Idea extends Model {}
+class Concept extends Model {}
 
-Idea.init(
+Concept.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -16,7 +16,7 @@ Idea.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    text: {
       type: DataTypes.TEXT,
       allowNull: false,
       unique: true,
@@ -30,26 +30,37 @@ Idea.init(
         model: 'user',
         key: 'id',
       },
-
   },
-}
+  public: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+  },
   
-  {  hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
-      },
-    },
+  outsideLink:{
+    type: DataTypes.STRING,
+  },
+  ChatLink: {
+    type: DataTypes.STRING,
+  },
+  categories: { 
+    type: DataTypes.STRING,
+    
+  },
+  date_created: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+},
+  
+ {,
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'idea',
+    modelName: 'concept',
   }
 );
 
-module.exports = User;
+module.exports = Concept;
