@@ -3,6 +3,6 @@ const userRoutes = require('./userRoutes');
 const sparkRoutes = require('./sparkRoutes');
 
 router.use('/users', userRoutes);
-router.use('/projects', sparkRoutes);
+router.use('/sparks', sparkRoutes);
 
 module.exports = router;
