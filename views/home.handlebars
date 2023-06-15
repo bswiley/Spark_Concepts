@@ -1,0 +1,33 @@
+<!--This is our navigation bar, this ought to change the way our page works -->
+
+<div class="row align-center mb-5">
+    <div>
+        <h2>Share Your Sparks!</h2>
+    </div>
+    <nav>
+      <button class="btn" id="My Sparks">My Sparks</button>
+      <button class="btn" id="My Information">My Information</button>
+      <button class="btn" id="Search User">Search User</button>
+      <button class="btn" id="Public Ideas">Public Ideas</button>
+      <button class="btn" id="Favorite Sparks">Favorite Sparks</button>
+      <button class="btn" id="Category Select">Category Select</button>
+      <button class="btn" id="Logout">Logout</button>
+    </nav>
+</div>
+    
+
+<!--These Names must be changed to match what we are using -->
+
+{{#each concept as |Concept| }}
+<div class="row align-center mb-5">
+  <!--Is our Menu for selection here? -->
+  <div class="col-md-6">
+    <href></href>
+    <h2>{{{concept.title}}} {{user.name}}</h2>
+  </div>
+  <div class="col-md-6">
+    <h2>{{{concept.text}}} {{favorite}}</h2>
+  </div>
+</div>
+{{/each}}
+
