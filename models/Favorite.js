@@ -12,26 +12,33 @@ Favorite.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id:{
+      count1:{
       type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      }},
-      concept_id:{
+    },
+      count2:{
       type: DataTypes.INTEGER, 
+    },
+      user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id',
+      },
+    },
+    concept_id: {
+      type: DataTypes.INTEGER,
       references: {
         model: 'concept',
         key: 'id',
-      }}
-
+      },
+  }
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product_tag',
+    modelName: 'favorite',
   }
 );
 

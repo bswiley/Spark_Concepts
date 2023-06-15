@@ -1,17 +1,52 @@
 [
   {
-    "name": "Sal",
+    "username": "Sal",
     "email": "sal@hotmail.com",
-    "password": "password12345"
+    "password": "word12345",
+    "bio" : "Woodworker. The happiest day of my life was when I got my lathe",
+    "link" : "lumberjocks.com/members/SalWoodward.786549",
+    "metric_id" : 1,
+    "metric1": 25,
+    "metric2": 12
   },
   {
-    "name": "Lernantino",
+    "username": "Lernantino",
     "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "password": "word12345",
+    "bio": "I've been a quilting hobbiest for 50 years. Wondering if I can get fresh ideas from non-quilters." ,
+    "link": "https://www.quiltster.com/Tinosquilts",
+    "metric_id": 2,
+    "metric1": 23,
+    "metric2": 8
   },
   {
-    "name": "Amiko",
+    "username": "Amiko",
     "email": "amiko2k20@aol.com",
-    "password": "password12345"
+    "password": "word12345",
+    "bio" : "I'm employed as a mechanical engineer by, but welding is my true passion.",
+    "link": "https://weldingweb.com/vbb/members/53953-welding-girl-lol",
+    "metric_id": 5,
+    "metric1": 5,
+    "metric2": 21
+  },
+  {
+    "username": "Jordan",
+    "email": "jordan99@msn.com",
+    "password": "word12345",
+    "bio": "'Goto' entusiast. It's not a dead language because I can program anything in BASIC",
+    "link": "www.reddit.com/user/TheCommodore",
+    "metric_id": 7,
+    "metric1": 30,
+    "metric2": 1
+  },
+  {
+    "username": "Blake",
+    "email": "the_blake@yahoo.com",
+    "password": "word12345",
+    "bio": "I've been programing for the last half century and love coming up with new projects",
+    "link": "www.github.com/Blake",
+    "metric_id": 4,
+    "metric1": 24,
+    "metric2": 11
   }
 ]

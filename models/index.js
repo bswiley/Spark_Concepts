@@ -9,20 +9,23 @@ const ProductTag = require('./ProductTag');
 Concept.belongsTo(User, {
   foreignKey: 'user_id',
 });
+
 // User has many Concepts
 User.hasMany(Concept, {
 foreignKey: 'user_id',
 onDelete: 'CASCADE',
 });
+
 // Comments belongsTo User
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
 });
+
 // User has many Comments
 User.hasMany(Comment, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE',
-  });
+});
 
 // Concept have many Comments
 Concept.hasMany(Comment, {
@@ -38,17 +41,16 @@ Comment.belongsTo(Concept, {
 // Concepts have many Users (through Favorite)
 Concept.hasMany(User, {
   through: Favorite,
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
 
 // Users belongToMany Concepts (through Favorite)
 User.belongsToMany(Concept, {
   through: Favorite,
-  foreignKey: 'concept_id'
+  foreignKey: 'concept_id',
+  onDelete: 'CASCADE',
 });
-
-
-
 
 module.exports = {
   Product,

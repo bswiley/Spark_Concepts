@@ -35,23 +35,24 @@ User.init(
         len: [8],
       },
     },
-    favorite:{
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      references: {
-        model: 'concept',
-        key: 'id',
-      },
+    bio: {
+        type: DataTypes.STRING,
+ },
+    link: {
+    type: DataTypes.STRING,
+
+ }
     },
-    stat1: {
+    metric_id: {
       type: DataTypes.STRING,
     },
-    stat2: {
+    metric1: {
       type: DataTypes.STRING,
     },
-    stat3: {
+    metric2: {
       type: DataTypes.STRING,
     },
-  },
+  
   {
     hooks: {
       beforeCreate: async (newUserData) => {

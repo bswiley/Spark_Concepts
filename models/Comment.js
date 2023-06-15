@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class comment extends Model {}
+class Comment extends Model {}
 
 Comment.init(
   {
@@ -27,7 +27,6 @@ Comment.init(
           key: 'id',
         },
     },
-
     concept_id: {
         type: DataTypes.INTEGER,
         references: {
