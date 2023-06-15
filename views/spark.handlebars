@@ -1,0 +1,17 @@
+<div class="row align-center mb-5">
+    <h3>{{concept}}</h3>
+    <h3>Created By {{user}}</h3>
+    <h3>{{concept.text}}</h3>
+    <button class="btn" id="Delete User">Delete User</button>
+</div>
+
+{{#each comment as |comment|}}
+{{comment.user_id}}
+{{comment.comment}}
+{{/each}}
+<div>
+    <nav>
+      <button class="btn" id="My Sparks">My Sparks</button>
+      <button class="btn" id="My Favorites">My Favorites</button>
+    </nav>
+</div>
