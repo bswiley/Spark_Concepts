@@ -5,7 +5,11 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findAll({
-      order: [['date_created', 'ASC']],
+      order: ['date_created'],include: [
+        {
+          model: User,
+          attributes: ['username'],
+        }]
     });
 
     console.log("here");
