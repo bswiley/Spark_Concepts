@@ -1,17 +1,20 @@
 const router = require('express').Router();
-const { Project } = require('../models');
+const { Comment, Concept, Favorite, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
-    const projectData = await Project.findAll({
-      order: [['name', 'ASC']],
+    const conceptData = await Concept.findAll({
+      order: [['date_created', 'ASC']],
     });
 
-    const projects = projectData.map((project) => project.get({ plain: true }));
+    console.log("here");
 
-    res.render('homepage', {
-      projects,
+    const concepts = conceptData.map((concept) => concept.get({ plain: true }));
+    console.log(concepts);
+    console.log("here2");
+    res.render('home', {
+      concepts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

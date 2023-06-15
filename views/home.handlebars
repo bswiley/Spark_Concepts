@@ -18,15 +18,15 @@
 
 <!--These Names must be changed to match what we are using -->
 
-{{#each concept as |Concept| }}
+{{#each concepts as |concept| }}
 <div class="row align-center mb-5">
   <!--Is our Menu for selection here? -->
   <div class="col-md-6">
     <href></href>
-    <h2>{{{concept.title}}} {{user.name}}</h2>
+    <h2>{{{concept.title}}} {{{concept.user}}}</h2>
   </div>
   <div class="col-md-6">
-    <h2>{{{concept.text}}} {{favorite}}</h2>
+    <h2>{{{concept.text}}} {{{concept.favorite}}}</h2>
   </div>
 </div>
 {{/each}}

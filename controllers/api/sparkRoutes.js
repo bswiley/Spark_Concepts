@@ -18,7 +18,7 @@ router.post('/concept', withAuth, async (req, res) => {
 });
 
 // Comments Get
-router.get('/comments', async (req, res) => {
+router.get('/comment:id', async (req, res) => {
     console.log(req.query);
     /*
     try {
