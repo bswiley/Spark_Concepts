@@ -26,6 +26,42 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/spark/:id', withAuth, async (req, res) => {
+  try {
+    const conceptData = await Concept.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          attributes: ['comment', 'date_created'],
+          include: [
+            { 
+              model: User,
+              attributes: ['username'],
+            }
+          ]
+        }
+      ]
+    });
+
+    console.log("here");
+
+    const concept = conceptData.get({ plain: true });
+    console.log(concept);
+    console.log("here2");
+
+    res.render('spark', {
+      concept,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
