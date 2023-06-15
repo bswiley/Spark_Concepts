@@ -11,15 +11,13 @@ Comment.init(
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-           },
+        },
     comment: {
         type: DataTypes.TEXT,
+        length: 'medium',
         allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-        },
       },
+      
       user_id: {
         type: DataTypes.INTEGER,
         references: {

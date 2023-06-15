@@ -18,11 +18,8 @@ Concept.init(
     },
     text: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      },
+      length: 'medium',
+      
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -57,7 +54,7 @@ Concept.init(
   }
 },
   
- {,
+ {
     sequelize,
     timestamps: false,
     freezeTableName: true,

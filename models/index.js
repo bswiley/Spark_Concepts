@@ -3,7 +3,7 @@ const Concept = require('./Concept');
 const Comment = require('./Comment');
 const Favorite = require('./Favorite');
 const User = require('./User');
-const ProductTag = require('./ProductTag');
+
 
 // Concepts belongsTo User
 Concept.belongsTo(User, {
@@ -27,7 +27,7 @@ User.hasMany(Comment, {
   onDelete: 'CASCADE',
 });
 
-// Concept have many Comments
+// Concepts have many Comments
 Concept.hasMany(Comment, {
   foreignKey: 'category_id',
   
@@ -39,7 +39,7 @@ Comment.belongsTo(Concept, {
 });
 
 // Concepts have many Users (through Favorite)
-Concept.hasMany(User, {
+Concept.belongsToMany(User, {
   through: Favorite,
   foreignKey: 'user_id',
   onDelete: 'CASCADE',
@@ -53,8 +53,8 @@ User.belongsToMany(Concept, {
 });
 
 module.exports = {
-  Product,
-  Category,
-  Tag,
-  ProductTag,
+  Concept,
+  Comment,
+  Favorite,
+  User,
 };
