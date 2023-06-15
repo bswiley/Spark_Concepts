@@ -41,8 +41,7 @@ User.init(
     link: {
     type: DataTypes.STRING,
 
- }
-,
+ },
     metric_id: {
       type: DataTypes.STRING,
     },
@@ -52,7 +51,7 @@ User.init(
     metric2: {
       type: DataTypes.STRING,
     },
-  
+  },
   {
     hooks: {
       beforeCreate: async (newUserData) => {
