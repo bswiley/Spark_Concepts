@@ -1,65 +1,64 @@
 const router = require('express').Router();
-const { Comment, Concept, Favorite } = require('../../models');
+const { Comment, Concept, Favorite, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/concept', withAuth, async (req, res) => {
   try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
+    const conceptData = await Concept.create({
+      "title": req.body.title,
+      "text": req.body.text,
+      "user_id": req.session.user_id,
+      "public": req.body.public,
+      "outsideLink": req.body.outsideLink,
+      "ChatLink": req.body.ChatLink,
+      "categories": req.body.categories,
+      "views": 0
     });
+    res.status(204).json("");
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/concept/:id', withAuth, async (req, res) => {
+  try {
+    const conceptData = await Concept.findByPk(req.params.id, {
+      include: {
+        model: User,
+        attributes: ['username'],
+      },
+    });
+    const concept = conceptData.get({ plain: true });
+    console.log(concept);
+
+    res.status(200).json(concept);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 // Comments Get
-router.get('/comment:id', async (req, res) => {
-    console.log(req.query);
-    /*
-    try {
-        const commentData = await User.findAll({ where: { concept_id: id } });
-
-        if (!userData) {
-            res
-                .status(400)
-                .json({ message: 'Incorrect email or password, please try again' });
-            return;
-        }
-
-        const validPassword = await userData.checkPassword(req.body.password);
-
-        if (!validPassword) {
-            res
-                .status(400)
-                .json({ message: 'Incorrect email or password, please try again' });
-            return;
-        }
-
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-            
-            res.json({ user: userData, message: 'You are now logged in!' });
-        });
-
-    } catch (err) {
-        res.status(400).json(err);
-    } */
-});
-
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
+router.get('/comments/:id', withAuth, async (req, res) => {
+  console.log(req.query);
+  
+  try {
+    const commentData = await Comment.findByPk(req.params.id, {
+      include: {
+        model: User,
+        attributes: ['username'],
+      },
     });
-  } else {
-    res.status(404).end();
+
+    console.log("here");
+    const comments = commentData.get({ plain: true });
+    console.log(comments);
+    console.log("here2");
+
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(400).json(err);
   }
+
 });
 
 module.exports = router;
