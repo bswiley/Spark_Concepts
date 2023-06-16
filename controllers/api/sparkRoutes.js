@@ -38,7 +38,7 @@ router.get('/concept/:id', withAuth, async (req, res) => {
 });
 
 // Comments Get
-router.get('/comments/:id', withAuth, async (req, res) => {
+router.get('/comment/:id', withAuth, async (req, res) => {
   console.log(req.query);
   
   try {
@@ -55,6 +55,24 @@ router.get('/comments/:id', withAuth, async (req, res) => {
     console.log("here2");
 
     res.status(200).json(comments);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+
+});
+
+// Comments Get
+router.post('/comment/:id', withAuth, async (req, res) => {
+  console.log(req.query);
+  
+  try {
+    const conceptData = await Comment.create({
+      "comment": req.body.comment,
+      "user_id": req.session.user_id,
+      "concept_id": req.body.concept_id,
+      "outsi": req.body.outsideLink
+    });
+    res.status(204).json("");
   } catch (err) {
     res.status(400).json(err);
   }
