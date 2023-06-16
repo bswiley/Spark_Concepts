@@ -1,10 +1,32 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection');
 const { Comment, Concept, Favorite, User } = require('../models');
 const withAuth = require('../utils/auth');
+const { Op } = require('sequelize')
 
 router.get('/', withAuth, async (req, res) => {
+  var category = ["metalwork", "software", "woodwork", "quilts"];
+  var user;
+
+  if (req.query.category){
+    category = req.query.category;
+  }
   try {
+    console.log(req.query);
+
     const conceptData = await Concept.findAll({
+      where: {
+          'categories': category,
+          [Op.or]: [
+            {
+              'public': true,
+            },
+            {
+              'user_id': req.session.user_id,
+              'public': false
+            }
+          ],
+      },
       order: [['date_created','ASC']],include: [
         {
           model: User,
@@ -29,6 +51,17 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/spark/:id', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
+      where: {
+        [Op.or]: [
+          {
+            'public': true,
+          },
+          {
+            'user_id': req.session.user_id,
+            'public': false
+          }
+        ],
+      },
       include: [
         {
           model: User,
@@ -50,7 +83,6 @@ router.get('/spark/:id', withAuth, async (req, res) => {
     console.log("here");
 
     const concept = conceptData.get({ plain: true });
-    const comment = commentData.get({ plain: true });
     console.log(concept);
     console.log(comment);
     console.log("here2");
