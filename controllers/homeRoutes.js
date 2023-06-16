@@ -36,7 +36,7 @@ router.get('/spark/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['comment', 'date_created'],
+          attributes: ['comment', 'createdAt'],
           include: [
             { 
               model: User,
@@ -50,7 +50,9 @@ router.get('/spark/:id', withAuth, async (req, res) => {
     console.log("here");
 
     const concept = conceptData.get({ plain: true });
+    const comment = commentData.get({ plain: true });
     console.log(concept);
+    console.log(comment);
     console.log("here2");
 
     res.render('spark', {
