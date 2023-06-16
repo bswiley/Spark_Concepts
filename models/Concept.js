@@ -51,6 +51,8 @@ Concept.init(
   },
   views: {
     type: DataTypes.INTEGER,
+    allownull: false,
+    defaultValue: 0
   }
 },
   
