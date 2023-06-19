@@ -1,40 +1,18 @@
-const router = require('express').Router();
-const sequelize = require('../config/connection');
-const { Comment, Concept, Favorite, User } = require('../models');
-const withAuth = require('../utils/auth');
-const { Op } = require('sequelize')
+const router = require("express").Router();
+const { Comment, Concept, Favorite, User } = require("../models");
+const withAuth = require("../utils/auth");
 
 router.get('/', withAuth, async (req, res) => {
-  var category = ["metalwork", "software", "woodwork", "quilts"];
-  var user;
-
-  if (req.query.category){
-    category = req.query.category;
-  }
-  try {
-    console.log(req.query);
-
-    const conceptData = await Concept.findAll({
-      where: {
-          'categories': category,
-          [Op.or]: [
-            {
-              'public': true,
-            },
-            {
-              'user_id': req.session.user_id,
-              'public': false
-            }
-          ],
+     try {
+   const conceptData = await Concept.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ['username'],
       },
-      order: [['date_created','ASC']],include: [
-        {
-          model: User,
-          attributes: ['username'],
-        }]
-    });
+    ],
+  });
 
-    console.log("here");
 
     const concepts = conceptData.map((concept) => concept.get({ plain: true }));
     console.log(concepts);
@@ -47,7 +25,6 @@ router.get('/', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 router.get('/spark/:id', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
@@ -68,7 +45,8 @@ router.get('/spark/:id', withAuth, async (req, res) => {
         },
       ],
     });
-   const concept = conceptData.get({ plain: true });
+
+    const concept = conceptData.get({ plain: true });
     console.log(concept)
     res.status(200).json(concept);
   } catch (err) {
@@ -77,13 +55,69 @@ router.get('/spark/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get("/fav", withAuth, async (req, res) => {
+  try {
+    const favData =  await Favorite.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: Concept, 
+          include: [User]
+        }
+      ]
+    })
+
+    console.log(favData);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
+
+// router.get('/spark/:id', withAuth, async (req, res) => {
+//   try {
+//     const conceptData = await Concept.findByPk(req.params.id, {
+//       attributes: ['title', 'text', 'date-created'],
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['username'],
+//         },
+//       ],
+//     });
+
+//     // const commentData = await Comment.findAll({
+//     //   where: { concept_id: req.params.id },
+//     //   include: [
+//     //     {
+//     //       model: User,
+//     //       attributes: ['username'],
+//     //     },
+//     //   ],
+//     // });
+
+//     // const comment = commentData.map((comment) => comment.get({ plain: true }));
+
+//     // Send the response
+//     res.render('spark', {
+//       concept: conceptData,
+//       logged_in: req.session.logged_in,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: 'An error occurred' });
+//   }
+// });
+router.get("/login", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
