@@ -6,8 +6,7 @@
 </div>
 
 {{#each concept.comments as |comment|}}
-{{>comment-details comment}}
-
+<p>{{comment[0].comment}}:{{comment[0].user.username}}: {{comment[0].createdAt}}</p>
 {{/each}}
 <div>
     <nav>
