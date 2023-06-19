@@ -48,7 +48,7 @@ router.get('/spark/:id', withAuth, async (req, res) => {
 
     const concept = conceptData.get({ plain: true });
     console.log(concept)
-    res.status(200).json(concept);
+    res.render('spark', { concept,logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'An error occurred' });

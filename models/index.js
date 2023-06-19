@@ -29,7 +29,7 @@ User.hasMany(Comment, {
 
 // Concepts have many Comments
 Concept.hasMany(Comment, {
-  foreignKey: 'category_id',
+  foreignKey: 'concept_id',
   
 });
 // Comments belong to Concepts
