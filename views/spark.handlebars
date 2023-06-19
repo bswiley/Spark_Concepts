@@ -4,10 +4,11 @@
     <p>{{concept.text}}</p>
     <button class="btn" id="Delete User">Delete User</button>
 </div>
-
+<div>
 {{#each concept.comments as |comment|}}
-<p>{{comment[0].comment}}:{{comment[0].user.username}}: {{comment[0].createdAt}}</p>
+  <p>{{comment.comment}}:{{comment.user.username}}: {{comment.createdAt}}</p>
 {{/each}}
+</div>
 <div>
     <nav>
       <button class="btn" id="My Sparks">My Sparks</button>
