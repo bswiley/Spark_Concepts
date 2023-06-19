@@ -51,17 +51,6 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/spark/:id', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
-      where: {
-        [Op.or]: [
-          {
-            'public': true,
-          },
-          {
-            'user_id': req.session.user_id,
-            'public': false
-          }
-        ],
-      },
       include: [
         {
           model: User,
@@ -69,30 +58,22 @@ router.get('/spark/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['comment', 'createdAt'],
+          attributes: ['date_created','comment'],
           include: [
-            { 
+            {
               model: User,
               attributes: ['username'],
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     });
-
-    console.log("here");
-
-    const concept = conceptData.get({ plain: true });
-    console.log(concept);
-    console.log(comment);
-    console.log("here2");
-
-    res.render('spark', {
-      concept,
-      logged_in: req.session.logged_in,
-    });
+   const concept = conceptData.get({ plain: true });
+    console.log(concept)
+    res.status(200).json(concept);
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 
