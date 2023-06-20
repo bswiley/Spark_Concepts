@@ -26,7 +26,7 @@ router.get('/', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.get('/spark/:id', withAuth, getUser, async (req, res) => {
+router.get('/spark/:id', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
       include: [
