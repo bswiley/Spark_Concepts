@@ -9,7 +9,7 @@
   <p> Comment added {{comment.createdAt}} by {{comment.user.username}}: </p>
   <p>{{comment.comment}}:: </p>
 {{/each}}
-  <p> </p>
+  <input type="text" id="newComment" name="fname"> <button onclick= "addComment" value="Post Comment" class="btn">
 </div>
 <div>
     <nav>
@@ -17,3 +17,24 @@
       <button class="btn" id="My Favorites">My Favorites</button>
     </nav>
 </div>
+
+<script>
+  function async addComment(){
+
+    const newComment = document.querySelector('#newComment').value.trim();
+
+    if (newComment) {
+      const response = await fetch('/api/spark/comment/' + concept.id, {
+        method: 'POST',
+        body: JSON.stringify({ newComment }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(response)
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        alert('Could not post data');
+      }
+    }
+  }
+</script>
