@@ -1,12 +1,13 @@
 <div class="row align-center mb-5">
     <p>{{concept.title}}</p>
     <p>Created By {{concept.user.username}}</p>
-    <p>{{concept.text}}</p>
+    <p>{{{concept.text}}}</p>
     <button class="btn" id="Delete User">Delete User</button>
 </div>
 <div>
 {{#each concept.comments as |comment|}}
-  <p>{{comment.comment}}:{{comment.user.username}}: {{comment.createdAt}}</p>
+  <p> Comment added {{format_date comment.date_created}} by {{comment.user.username}}: </p>
+  <p>{{comment.comment}}:: </p>
 {{/each}}
 </div>
 <div>
