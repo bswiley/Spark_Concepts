@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Comment, Concept, Favorite, User } = require("../models");
 const withAuth = require("../utils/auth");
+const getUser = require("../utils/userid");
 
 router.get('/', withAuth, async (req, res) => {
      try {
@@ -25,7 +26,7 @@ router.get('/', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.get('/spark/:id', withAuth, async (req, res) => {
+router.get('/spark/:id', withAuth, getUser, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
       include: [
@@ -35,7 +36,7 @@ router.get('/spark/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['createdAt','comment'],
+          attributes: ['date_created','comment'],
           include: [
             {
               model: User,
@@ -48,15 +49,16 @@ router.get('/spark/:id', withAuth, async (req, res) => {
 
     const concept = conceptData.get({ plain: true });
     console.log(concept)
-    res.render('spark', { concept,logged_in: req.session.logged_in,});
+    res.render('spark', {concept, logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'An error occurred' });
   }
 });
 
-router.get("/fav", withAuth, async (req, res) => {
+router.get('/fav', withAuth, async (req, res) => {
   try {
+    console.log(req.session.user_id);
     const favData =  await Favorite.findAll({
       where: {
         user_id: req.session.user_id
@@ -68,8 +70,9 @@ router.get("/fav", withAuth, async (req, res) => {
         }
       ]
     })
-
-    console.log(favData);
+    const favorites = favData.map(favorite => favorite.get({ plain: true }));
+    console.log(favorites);
+    res.status(200).json(favorites);
 
   } catch (err) {
     console.error(err);
