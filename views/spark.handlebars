@@ -6,9 +6,10 @@
 </div>
 <div>
 {{#each concept.comments as |comment|}}
-  <p> Comment added {{format_date comment.date_created}} by {{comment.user.username}}: </p>
+  <p> Comment added {{comment.createdAt}} by {{comment.user.username}}: </p>
   <p>{{comment.comment}}:: </p>
 {{/each}}
+  <p> </p>
 </div>
 <div>
     <nav>
