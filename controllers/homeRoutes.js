@@ -35,7 +35,7 @@ router.get('/spark/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['date_created','comment'],
+          attributes: ['createdAt','comment'],
           include: [
             {
               model: User,
