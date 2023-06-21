@@ -9,7 +9,7 @@
   <p> Comment added {{comment.createdAt}} by {{comment.user.username}}: </p>
   <p>{{comment.comment}}:: </p>
 {{/each}}
-  <input type="text" id="newComment" name="fname"> <button onclick= "addComment" value="Post Comment" class="btn">
+  <input type="text" id="newComment"> <button onclick="addComment()" value="Post Comment" class="btn">
 </div>
 <div>
     <nav>
@@ -22,6 +22,7 @@
   function async addComment(){
 
     const newComment = document.querySelector('#newComment').value.trim();
+    console.log(newComment);
 
     if (newComment) {
       const response = await fetch('/api/spark/comment/' + concept.id, {
