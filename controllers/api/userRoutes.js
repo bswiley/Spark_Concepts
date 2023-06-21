@@ -20,9 +20,9 @@ router.post('/', withAuth, async (req, res) => {
 /**
  * Gets a user that matches the desired username
  */
-router.get('/:username', withAuth, async (req, res) => {
+router.get('/:username', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { username: req.params.username}, attributes: {exclude: ["password"]} });
+    const userData = await User.findOne({ where: { id: req.params.username}, attributes: {exclude: ["password"]} });
     if(userData == null){
       res.status(200).json({});
       return;
