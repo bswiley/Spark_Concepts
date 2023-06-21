@@ -62,18 +62,44 @@ router.get('/comment/:id', withAuth, async (req, res) => {
 });
 
 // Comments Get
-router.post('/comment/:id', withAuth, async (req, res) => {
+router.get('/comments', withAuth, async (req, res) => {
   console.log(req.query);
   
   try {
-    const conceptData = await Comment.create({
-      "comment": req.body.comment,
-      "user_id": req.session.user_id,
-      "concept_id": req.body.concept_id,
-      "outsi": req.body.outsideLink
+    const commentData = await Comment.findAll({
+      include: {
+        model: User,
+        attributes: ['username'],
+      },
     });
+
+    console.log("here");
+    const comments = commentData.get({ plain: true });
+    console.log(comments);
+    console.log("here2");
+
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+
+});
+
+// Comments post
+router.post('/comment/:id', withAuth, async (req, res) => {
+  console.log(`post request to comments`);
+  console.log(`"comment": ${req.body.comment}, "user_id": ${req.session.user_id}, "concept_id": ${req.params.id}`);
+
+  try {
+    const conceptData = await Comment.create({
+      comment: req.body.comment,
+      user_id: req.session.user_id,
+      concept_id: req.params.id,
+    });
+    console.log(conceptData.toJSON());
     res.status(204).json("");
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 

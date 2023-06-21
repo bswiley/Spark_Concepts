@@ -9,7 +9,10 @@
   <p> Comment added {{comment.createdAt}} by {{comment.user.username}}: </p>
   <p>{{comment.comment}}:: </p>
 {{/each}}
-  <input type="text" id="newComment"> <button onclick="addComment()" value="Post Comment" class="btn">
+  <form class="form new-comment">
+    <input type="text" id="newComment"></input> 
+    <button id="new-comment" class="btn">Post Comment</button>
+  </form>
 </div>
 <div>
     <nav>
@@ -19,23 +22,28 @@
 </div>
 
 <script>
-  function async addComment(){
-
+  const addCommentFormHandler = async (event) => {
+    console.log(`triggered add comment form handler`)
+    event.preventDefault();
+  
     const newComment = document.querySelector('#newComment').value.trim();
     console.log(newComment);
 
-    if (newComment) {
-      const response = await fetch('/api/spark/comment/' + concept.id, {
-        method: 'POST',
-        body: JSON.stringify({ newComment }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      console.log(response)
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Could not post data');
-      }
+    if (newComment.length > 0) {
+        const response = await fetch('/api/sparks/comment/' + {{concept.id}}, {
+            method: 'POST',
+            body: `{"comment": "${newComment}"}`,
+            headers: { 'Content-Type': 'application/json' },
+        });
+        console.log(response)
+        if (response.ok) {
+            document.location.replace('/');
+        } else {
+            alert('Could not post data');
+        }
     }
-  }
+};
+document
+    .querySelector('.new-comment')
+    .addEventListener('submit', addCommentFormHandler);
 </script>
