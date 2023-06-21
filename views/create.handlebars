@@ -2,6 +2,11 @@
 
 <form class="form create-form">
   <div class="form-group">
+    <label>
+  <input type="checkbox" name="myCheckbox" value="1">
+  Public
+</label>
+  <div class="form-group">
     <label for="Title">Title</label>
     <input class="form-input" type="text" id="email-login" />
   </div>
@@ -12,8 +17,24 @@
   <div class="form-group">
     <label for"Outside link">Outside link</label>
     <input class="form-input" type="text" id="link"/>
-  <div class="form-group">
-    <button class="btn btn-primary" type="submit">login</button>
+    </div>
+    <div class="form-group">
+    <label for"Chat-Link">Outside link</label>
+    <input class="form-input" type="text" id="Chat"/>
+    </div>
+ 
   </div>
+  <div class="form-group">
+      <label for="categories">Select an option:</label>
+  <select id="categories" name="dropdown">
+    <option value="software">software</option>
+    <option value="woodwork">woodwork</option>
+    <option value="metalwork">metalwork</option>
+    <option value="quilts">quilts</option>
+  </select>
+  </div>
+   <div class="form-group">
+    <button class="btn btn-primary" type="submit">Create</button>
+  <input type="submit" value="Submit">
 </form>
 <script src="/js/create.js"></script>
