@@ -42,16 +42,20 @@ Comment.belongsTo(Concept, {
 // Concepts belongToMany Users (through Favorite)
 Concept.belongsToMany(User, {
   through: Favorite,
-  foreignKey: 'concept_id',
-  as: 'favoritedBy',
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+  // foreignKey: 'concept_id',
+  // as: 'favoritedBy',
   
 });
 
 // Users belongToMany Concepts (through Favorite)
 User.belongsToMany(Concept, {
   through: Favorite,
-  foreignKey: 'user_id',
-  as: "favoriteConcepts",
+  foreignKey: 'concept_id',
+  onDelete: 'CASCADE',
+  // foreignKey: 'user_id',
+  // as: "favoriteConcepts",
  
 });
 
