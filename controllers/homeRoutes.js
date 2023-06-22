@@ -185,4 +185,8 @@ router.get('/create', withAuth, async (req, res) => {
   res.render("create");
 });
 
+router.get('/generatespark', withAuth, async (req, res) => {
+  res.render("generate");
+});
+
 module.exports = router;
