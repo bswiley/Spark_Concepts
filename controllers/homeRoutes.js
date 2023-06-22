@@ -112,6 +112,32 @@ router.get('/fav', withAuth, async (req, res) => {
   }
 });
 
+router.get('/myuser/', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { id: req.session.user_id}, attributes: {exclude: ["password"]} })
+
+    const user = userData.get({ plain: true });
+    console.log(user)
+    res.render('user', {user, logged_in: req.session.logged_in,});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+router.get('/user/:id', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { id: req.params.id}, attributes: {exclude: ["password"]} })
+
+    const user = userData.get({ plain: true });
+    console.log(user)
+    res.render('user', {user, logged_in: req.session.logged_in,});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 // router.get('/spark/:id', withAuth, async (req, res) => {
 //   try {
 //     const conceptData = await Concept.findByPk(req.params.id, {
