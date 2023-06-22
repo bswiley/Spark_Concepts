@@ -3,7 +3,15 @@ const { Comment, Concept, Favorite, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/concept', withAuth, async (req, res) => {
+  console.log("making a concept");
   try {
+    console.log(`title = ${req.body.title}`);
+    console.log(`text = ${req.body.text}`);
+    console.log(`public = ${req.body.public}`);
+    console.log(`outsideLink = ${req.body.outsideLink}`);
+    console.log(`ChatLink = ${req.body.ChatLink}`);
+    console.log(`categories = ${req.body.categories}`);
+
     const conceptData = await Concept.create({
       "title": req.body.title,
       "text": req.body.text,
@@ -14,6 +22,7 @@ router.post('/concept', withAuth, async (req, res) => {
       "categories": req.body.categories,
       "views": 0
     });
+    console.log(conceptData.toJSON());
     res.status(204).json("");
   } catch (err) {
     res.status(400).json(err);

@@ -155,4 +155,8 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.get('/create', withAuth, async (req, res) => {
+  res.render("create");
+});
+
 module.exports = router;
