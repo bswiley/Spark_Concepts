@@ -20,6 +20,7 @@ as: 'createdConcepts',
 // Comments belongsTo User
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
+  as: 'creator',
 });
 
 // User has many Comments
@@ -45,7 +46,7 @@ Concept.belongsToMany(User, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE',
   // foreignKey: 'concept_id',
-  // as: 'favoritedBy',
+  as: 'favoritedBy',
   
 });
 

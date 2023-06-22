@@ -26,11 +26,12 @@ router.get('/', withAuth, async (req, res) => {
           }
         ],
     },
-    order: [['date_created','ASC']],
+    order: [['date_created','DESC']],
     include: [
       {
         model: User,
         attributes: ['username'],
+        as: 'creator'
       },
     ],
   });
@@ -39,7 +40,9 @@ router.get('/', withAuth, async (req, res) => {
     const concepts = conceptData.map((concept) => concept.get({ plain: true }));
     console.log(concepts);
     console.log("here2");
-    res.render('home', {
+    res.
+    // status(200).json(concepts);
+     render('home', {
       concepts,
       logged_in: req.session.logged_in,
     });
@@ -50,29 +53,20 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/spark/:id', withAuth, async (req, res) => {
   try {
     const conceptData = await Concept.findByPk(req.params.id, {
-      where: {
-        [Op.or]: [
-          {
-            'public': true,
-          },
-          {
-            'user_id': req.session.user_id,
-            'public': false
-          }
-        ],
-      },
       include: [
         {
           model: User,
           attributes: ['username'],
+          as: 'creator',
         },
         {
           model: Comment,
-          attributes: ['createdAt','comment'],
+          attributes: ['createdAt', 'comment'],
           include: [
             {
               model: User,
               attributes: ['username'],
+              as: 'creator',
             },
           ],
         },
@@ -80,10 +74,10 @@ router.get('/spark/:id', withAuth, async (req, res) => {
     });
 
     const concept = conceptData.get({ plain: true });
-    console.log(concept)
-    res.render('spark', {concept, logged_in: req.session.logged_in,});
-  } catch (err) {
-    console.error(err);
+    console.log(concept);
+    res.render('spark', { concept, logged_in: req.session.logged_in });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'An error occurred' });
   }
 });
@@ -98,7 +92,8 @@ router.get('/fav', withAuth, async (req, res) => {
       include: [
         {
           model: Concept, 
-          include: [User]
+          include: [User],
+          as: 'favoritedBy'
         }
       ]
     })
