@@ -5,7 +5,7 @@
 # Spark-Concepts
 
 ## Description
-This project is a full stack project that uses node.js, express.js, mysql, sequelize, and handlebars to build up the project.  The project itself is in the same directory as this README.md file for download and use, while a live version is deployed at ([https://spark-concepts-dad483b0ca89.herokuapp.com](#https://spark-concepts-dad483b0ca89.herokuapp.com/)). If the link doesn't work and you wish to use the site in a local server, you can clone the project and deploy it or use it locally.  The purpose of the application is to create an online community for builders or other people who like to create things.  As used in the application a "spark" is an idea for a project that can be built or an idea of something a user wants to build.  These ideas can be posted on the site and other users can comment, and/or provide adivice on how to proceed with the developing or building the project.  Of course, the application was created by software developers, but the projects are no   
+This project is a full stack project that uses node.js, express.js, mysql, sequelize, and handlebars to build up the project.  The project itself is in the same directory as this README.md file for download and use, while a live version is deployed at ([https://spark-concepts-dad483b0ca89.herokuapp.com](#https://spark-concepts-dad483b0ca89.herokuapp.com/)). If the link doesn't work and you wish to use the site in a local server, you can clone the project and deploy it or use it locally.  The purpose of the application is to create an online community for builders or other people who like to create things.  As used in the application a "Ppark" is an idea for a project that can be built or an idea of something a user wants to build.  These ideas can be posted on the site and other users can comment, and/or provide adivice on how to proceed with developing or building the project.  Of course, the application was created by software developers, but the projects may lean in that direction, but the belief beind the idea was to create a community where people who make things can communicate on bringing those ideas into reality.   
 
 ## Table of Contents
 
@@ -22,18 +22,19 @@ This project is a full stack project that uses node.js, express.js, mysql, seque
 [Questions](#Questions)
 
 ## Installation
-The user needs to have Node.js installed and the dependencies js and inquirer installed in  Node.js
+If one uses the link above, of course, nothing is required for using the application.  Just click the link and begin.  If however, one wants to download the application and run it locally, that person must already have node.js and mysql installed on their system.  Once that is done, they only need to get into the cloned directory with their node.js terminal and then type "npm install."  This should install all the required dependencies locally so that the application can run.  After that is done, one will need to get into mysql and SOURCE the db/schema.sql file. But before that, the .env file needs to be filled out according to your local system.  Mainly what is needed is the username and password for the local copy of mysql.  The database is "spark_db."  There is also an option to use Chatgpt to help generate "Sparks."  To use that function, you will need to have an accont with Chatgpt and an API key for it.  Keys can be created by going to your account and clicking the "personal" menu after you log in and chose the "API" option.  After that is done return to node, run "npm install seed" and then "npm start" to use the application.  The seeds will already include fake database information.  If it's desired to not use the fake data, new data can be used to replace the fake data keeping the original data structure in tact in the "seeds/comment-seeds.js", "seeds/concept-seeds.js", "seeds/favorite-seeds.js", and "seeds/userData.json" files. Finally,  
 
 ## Usage
-When the installation requirements are met, one merely needs to type "node index.js" to start to app and answer the questions.  The required logo will then be build in the "examples" folder (assuming the entire repository is cloned).  One example that is there now is [Square.svg](./examples/square.svg). Here is a [video](https://drive.google.com/file/d/1UA608TGSa_yhb_lI-vAUENx-lsB8rIGZ/view?usp=share_link) demonstrating how to use it and how it works.
+Although it might be desirable to change the data used, using the application after that is relatively easy.  If used locally, after performing the installation steps, all is needed is to pull up a browser and type "localhost:3001/" in the address bar.  From there you can use the application locally.  
 
 ## Tests
-To test the classes that build the shapes one can run the [shapes.test.js](./lib/Shapes/shapes.test.js) in the  ./lib/Shapes folder. To run the tests use a CLI with Node.js installed and  Jest installed as a dependencie,  simply  type "npm run test".  The Package.json file should have the scripts that are required to make the test work correctly. Here is a [video](https://drive.google.com/file/d/1yccwgxjyD4WKYDPSVzmHqg1A4LDn0IcU/view?usp=sharing) showing it passing the tests.
+Other than the testing that went into it during development, there are no pre-prepared tests that we've created to test the application.  
 
 ## License
 This project has a/n MIT License
 
 ## Questions
-This project can be accesed at github.com/bswiley/Logification.  If you have questions, please email me at bswiley@gmail.com.
+The full project repository is at https://github.com/bswiley/Spark_Concepts and a deployed copy is athttps://spark-concepts-dad483b0ca89.herokuapp.com.  If you have questions, please email me at bswiley@gmail.com.
+
 ## Contributing
-If one would like to contribute to the repsitory, they can email me at the email address in the "questions" section. 
+If one would like to contribute to the repsitory, also feel free to email me at the address above.  
