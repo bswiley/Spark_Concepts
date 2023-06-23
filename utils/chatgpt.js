@@ -16,7 +16,7 @@ async function createChatCompletion(string) {
         //console.log(response.toJSON());
         console.log("done");
         console.log(response.data.choices[0].message.content)
-        return response;
+        return response.data.choices[0].message.content;
     } catch (error) {
         console.error(error);
     }

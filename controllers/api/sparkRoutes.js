@@ -120,7 +120,8 @@ router.get('/generate/:category', async (req, res) => {
   console.log(req.query);
   
   try {
-    var promt = createChatCompletion("You: Can you describe a random project in the area of " + req.params.category)
+    var promt = await createChatCompletion("You: Can you describe a random project in the area of " + req.params.category)//.then(res.status(200).json(promt.toJSON()));
+    //const response = promt.map((res) => res.get({ plain: true }))
 
     console.log(promt);
 
