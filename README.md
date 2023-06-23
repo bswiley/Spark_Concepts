@@ -1,7 +1,7 @@
 # Spark-Concepts
 
 ## Description
-This project is a full stack project that uses node.js, express.js, mysql, sequelize, and handlebars to build up the project.  The project itself is in the same directory as this README.md file for download and use, while a live version is deployed [here](#https://spark-concepts-dad483b0ca89.herokuapp.com/)). If the link doesn't work or you wish to use the site in a local server, you can clone the project and deploy it or use it locally.  The purpose of the application is to create an online community for builders or other people who like to create things.  As used in the application a "Spark" is an idea for a project that can be built or an idea of something a user wants to build.  These ideas can be posted on the site and other users can comment and/or provide adivice on how to proceed with developing or building the project.  Of course, the application was created by software developers, but the projects don't necessarily need to lean in that direction, but the belief behind the idea was to create a community where people who make things can communicate on bringing those ideas into reality.   
+This project is a full stack project that uses node.js, express.js, mysql, sequelize, and handlebars to build up the project.  The project itself is in the same directory as this README.md file for download and use, while a live version is deployed [here](https://spark-concepts-dad483b0ca89.herokuapp.com/) or at [sparkmyconcepts.com](http://sparkmyconcepts.com/). If the link doesn't work or you wish to use the site in a local server, you can clone the project and deploy it or use it locally.  The purpose of the application is to create an online community for builders or other people who like to create things.  As used in the application a "Spark" is an idea for a project that can be built or an idea of something a user wants to build.  These ideas can be posted on the site and other users can comment and/or provide adivice on how to proceed with developing or building the project.  Of course, the application was created by software developers, but the projects don't necessarily need to lean in that direction, but the belief behind the idea was to create a community where people who make things can communicate on bringing those ideas into reality.   
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ To install locally please follow the following steps:
 if seed data is needed please run "npm run seed" which will generate some basic data. 
 
 ## Usage
-To use the application either navigate to the public url ([sparkmyconcepts](http://sparkmyconcepts.com/)) or "localhost:3001" for the local copy. 
+To use the application either navigate to the public url [sparkmyconcepts](http://sparkmyconcepts.com/) or "localhost:3001" for the local copy. 
 
 On load it should redirect you to login or make an account. To make an account you need to use an unique email and a password thats at least 8 letters long.
 
