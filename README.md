@@ -1,7 +1,3 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
-
 # Spark-Concepts
 
 ## Description
@@ -22,19 +18,39 @@ This project is a full stack project that uses node.js, express.js, mysql, seque
 [Questions](#Questions)
 
 ## Installation
-If one uses the link above, of course, nothing is required for using the application.  Just click the link and begin.  If however, one wants to download the application and run it locally, that person must already have node.js and mysql installed on their system.  Once that is done, they only need to get into the cloned directory with their node.js terminal and then type "npm install."  This should install all the required dependencies locally so that the application can run.  After that is done, one will need to get into mysql and SOURCE the db/schema.sql file. But before that, the .env file needs to be filled out according to your local system.  Mainly what is needed is the username and password for the local copy of mysql.  The database is "spark_db."  There is also an option to use Chatgpt to help generate "Sparks."  To use that function, you will need to have an accont with Chatgpt and an API key for it.  Keys can be created by going to your account and clicking the "personal" menu after you log in and chose the "API" option.  After that is done return to node, run "npm install seed" and then "npm start" to use the application.  The seeds will already include fake database information.  If it's desired to not use the fake data, new data can be used to replace the fake data keeping the original data structure in tact in the "seeds/comment-seeds.js", "seeds/concept-seeds.js", "seeds/favorite-seeds.js", and "seeds/userData.json" files. Finally,  
+Prerequisites are that you must already have node.js and mysql installed on your system.  
+
+To install locally please follow the following steps:
+1. Clone the directory 
+2. Run "npm install" in the terminal to install all the required dependencies  
+3. Fill the .env file needs to be filled out according to your local system
+4. Login to chatgpt and inside your account get an api key to add to the env file
+5. Setup the "spark_db" database
+6. Run "npm start" to instantiate the application.  
+
+if seed data is needed please run "npm run seed" which will generate some basic data. 
 
 ## Usage
-Although it might be desirable to change the data used, using the application after that is relatively easy.  If used locally, after performing the installation steps, all is needed is to pull up a browser and type "localhost:3001/" in the address bar.  From there you can use the application locally.  
+To use the application either navigate to the public url ([sparkmyconcepts](http://sparkmyconcepts.com/)) or "localhost:3001" for the local copy. 
+
+On load it should redirect you to login or make an account. To make an account you need to use an unique email and a password thats at least 8 letters long.
+
+After you login or are already loged in it will take you to the main landing page with will get all the public spark/ideas. You can click on an idea to check out the comments or you can use the nav bar to get to the create idea's page where you can use chat gpt to generate a random idea for you.
+
+There is also a user tab as well as a tab to view your own user information.
 
 ## Tests
-Other than the testing that went into it during development, there are no pre-prepared tests that we've created to test the application.  
+There are no pre-prepared tests that we've created to test the application.  
 
 ## License
-This project has a/n MIT License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Questions
-The full project repository is at https://github.com/bswiley/Spark_Concepts and a deployed copy is athttps://spark-concepts-dad483b0ca89.herokuapp.com.  If you have questions, please email me at bswiley@gmail.com.
+## Questions/Comments
+We would like to have a cleaner UI as well as better utilizations for chat gpt which will allow for cleaner inputs and more variable inputs from the user.
+
+Also we have a hard coded category list as well as a goal to utilize metrics for comments/favorites but was not able to fully impletement them in the code base. 
 
 ## Contributing
-If one would like to contribute to the repsitory, also feel free to email me at the address above.  
+This is a group project completed by Brian Wiley, Chris Osborne, and Colin Laukka. 
+
+If one would like to contribute to the repsitory as well feel free to email Brian Wiley at bswiley@gmail.com.  
