@@ -1,4 +1,4 @@
-const makeSparkFormHandler = async (event) => {
+const makeQueryHandler = async (event) => {
     console.log(`triggered add comment form handler`)
     event.preventDefault();
   
@@ -20,19 +20,18 @@ const makeSparkFormHandler = async (event) => {
     console.log("make new spark");
 
     
-    const response = await fetch('/api/sparks/concept', {
-        method: 'POST',
-        body: JSON.stringify({ title, text, public, outsideLink, ChatLink, categories}),
+    const response = await fetch('/api/sparks/generate/' + categories, {
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     });
-    console.log(response)
     if (response.ok) {
-        document.location.replace('/');
+        document.querySelector('#spark-text').value = await response.text();
     } else {
-        alert('Could not post data');
+        alert('Could not get data');
     }
     
 };
+
 document
-    .querySelector('#create')
-    .addEventListener('submit', makeSparkFormHandler);
+    .querySelector('#gpt')
+    .addEventListener('click', makeQueryHandler);
