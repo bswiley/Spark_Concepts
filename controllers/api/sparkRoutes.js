@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Comment, Concept, Favorite, User } = require('../../models');
 const withAuth = require('../../utils/auth');
+const createChatCompletion = require('../../utils/chatgpt');
 
 router.post('/concept', withAuth, async (req, res) => {
   console.log("making a concept");
@@ -109,6 +110,22 @@ router.post('/comment/:id', withAuth, async (req, res) => {
     res.status(204).json("");
   } catch (err) {
     console.log(err);
+    res.status(400).json(err);
+  }
+
+});
+
+// Comments Get
+router.get('/generate/:category', async (req, res) => {
+  console.log(req.query);
+  
+  try {
+    var promt = createChatCompletion("You: Can you describe a random project in the area of " + req.params.category)
+
+    console.log(promt);
+
+    res.status(200).json(promt);
+  } catch (err) {
     res.status(400).json(err);
   }
 
