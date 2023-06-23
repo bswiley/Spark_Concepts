@@ -35,4 +35,4 @@ const makeSparkFormHandler = async (event) => {
 };
 document
     .querySelector('#create')
-    .addEventListener('submit', makeSparkFormHandler);
+    .addEventListener('click', makeSparkFormHandler);
