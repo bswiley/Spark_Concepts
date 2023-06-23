@@ -116,7 +116,7 @@ router.post('/comment/:id', withAuth, async (req, res) => {
 });
 
 // Comments Get
-router.get('/generate/:category', async (req, res) => {
+router.get('/generate/:category', withAuth, async (req, res) => {
   console.log(req.query);
   
   try {
