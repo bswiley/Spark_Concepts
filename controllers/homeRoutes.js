@@ -120,6 +120,10 @@ router.get('/myuser/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/user', withAuth, async (req, res) => {
+  res.render('user-search');
+});
+
 router.get('/user/:id', withAuth, async (req, res) => {
   try {
     const userData = await User.findOne({ where: { id: req.params.id}, attributes: {exclude: ["password"]} })
@@ -129,7 +133,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
     res.render('user', {user, logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'An error occurred' });
+    res.render('user-search');
   }
 });
 
