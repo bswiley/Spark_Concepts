@@ -1,7 +1,7 @@
 const makeQueryHandler = async (event) => {
     console.log(`triggered add comment form handler`)
     event.preventDefault();
-    document.querySelector('#spark-text').value = "ChatGPT is thinking. Value will be here when completed";
+    document.querySelector('#spark-text').value = "Communicating with Chatgpt. Response will appear here when completed";
   
     
 
@@ -21,12 +21,14 @@ const makeQueryHandler = async (event) => {
     console.log("make new spark");
 
     
-    const response = await fetch('/api/sparks/generate/' + categories, {
+    const response = await fetch('/api/sparks/generate/' + title, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     });
     if (response.ok) {
-        document.querySelector('#spark-text').value = await response.text();
+        let responseData = await response.text();
+        let reformatedResponse = responseData.replace("\n", "<br>")
+        document.querySelector('#spark-text').value = reformatedResponse
     } else {
         alert('Could not get data');
     }
