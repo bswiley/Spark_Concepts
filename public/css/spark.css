@@ -87,7 +87,7 @@
  */
 
 @media screen and (max-width: 800px) {
-    .navbar a, .dropdown .dropbtn {
+    .navbar a:not(.keep), .dropdown .dropbtn {
       display: none;
     }
     .navbar a.icon {
