@@ -1,6 +1,7 @@
 const makeQueryHandler = async (event) => {
     console.log(`triggered add comment form handler`)
     event.preventDefault();
+    document.querySelector('#spark-text').value = "ChatGPT is thinking. Value will be here when completed";
   
     
 
