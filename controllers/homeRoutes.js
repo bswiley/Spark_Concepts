@@ -181,11 +181,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get('/create', withAuth, async (req, res) => {
-  res.render("create");
-});
-
-router.get('/generatespark', withAuth, async (req, res) => {
-  res.render("generate");
+  res.render("create", {logged_in: req.session.logged_in});
 });
 
 module.exports = router;
