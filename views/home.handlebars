@@ -43,15 +43,19 @@
     
 
 <!--These Names must be changed to match what we are using -->
-
-{{#each concepts as |concept| }}
 <div class="row align-center mb-5">
   <!--Is our Menu for selection here? -->
-  <div class="container">
-    <p>
-      <a href=./spark/{{concept.id}}>{{concept.title}} by {{concept.creator.username}}</a>
-      </p>
-  </div>
+  {{#each concepts as |concept|}}
+    <a href="./spark/{{concept.id}}">
+      <div class="card">
+          <h3 class="card-title">{{concept.title}}<h3>
+          <h3 class="card-user">{{concept.creator.username}}</h3>
+          <p class="card-body">
+              {{concept.description}}
+          </p>
+      </div>
+    </a>
+  {{/each}}
 </div>
-{{/each}}
+
 
