@@ -116,7 +116,7 @@ router.post('/comment/:id', withAuth, async (req, res) => {
 });
 
 // Comments Get
-router.get('/generate/:category', withAuth, async (req, res) => {
+router.get('/generate/:category', async (req, res) => {
   console.log(req.query);
   
   try {
@@ -127,7 +127,7 @@ router.get('/generate/:category', withAuth, async (req, res) => {
 
     res.status(200).json(promt);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json("can not get the response properly");
   }
 
 });
