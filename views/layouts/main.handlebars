@@ -7,23 +7,24 @@
   <title>Spark Concepts</title>
   <link rel="icon" type="image/png" href="/images/spark.svg"/>
   <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/spark.css">
 </head>
 
 <body>
   <header class="display-flex justify-space-between align-center p-2">
     <!-- Only display the logout button if the user is logged in -->
     {{#if logged_in}}
-    <nav>
-      <button class="btn" id="logout">logout</button>
-    </nav>
-    <nav>
-      <a href=./{{user.sparks}}>My Sparks  </a>
+    <div class="navbar" id="topnavbar">
+      <a href=./>Home</a>
+      <a href=./about>About</a>
       <a href=./myuser>My Information  </a>
       <a href=./user>Search User  </a>
       <a href=.> Homepage  </a>
       <a href=./fav>Favorite Sparks  </a>
       <a href=./create>Create a Spark!  </a>
-      <a href=./generate>Make a Random Idea!  </a>
+      <a href=./logout>Logout  </a>
+      <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div> 
     </nav>
     {{/if}}
   </header>
@@ -39,5 +40,16 @@
   <script src="/js/logout.js"></script>
   {{/if}}
 </body>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("topnavbar");
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+}
+</script>
 
 </html>
