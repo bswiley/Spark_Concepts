@@ -27,6 +27,17 @@
     <button class="btn btn-primary" id ="updateUser" type="button">Update User</button>
 </div>
 
+<div class="contentBox">
+  <h3>{{user.username}}'s Sparks:</h3>
+  {{#each concepts as |concept|}}
+    <a href="/spark/{{concept.id}}">
+      <div class="card">
+          <h3 class="card-title">Title: {{concept.title}}<h3>
+      </div>
+    </a>
+  {{/each}}
+</div>
+
 <script>
     const updateUser = async (event) => {
         console.log(`triggered add comment form handler`)
@@ -53,4 +64,10 @@
     document
         .querySelector('#updateUser')
         .addEventListener('click', updateUser);
+
+    console.log(window.location.pathname);
+    if(window.location.pathname != "/myuser"){
+        var button = document.getElementById('updateUser');
+        button.style.display = "none";
+    }
 </script>

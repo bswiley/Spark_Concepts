@@ -1,17 +1,30 @@
-<div class="row align-center mb-5">
-    <p>{{concept.title}}<br>Created By {{concept.creator.username}}</p>
-    <p>{{{concept.text}}}</p>
-    <button class="btn" id="Delete User">Delete User</button>
+<div class="">
+  <div class="card">
+    <h3 class="card-title">{{concept.title}}<h3>
+    <h3 class="card-user" id="author">
+      <a href="/user/{{concept.creator.username}}">By: {{concept.creator.username}}</a>
+    </h3>
+    <p> Description: {{{concept.text}}}</p>
+  </div>
 </div>
+
 <div>
-{{#each concept.comments as |comment|}}
-  <p> Comment added {{comment.createdAt}} by {{comment.creator.username}}: </p>
-  <p>{{comment.comment}}:: </p>
-{{/each}}
-  <form class="form new-comment">
-    <input type="text" id="newComment"></input> 
+  <div class="card">
+    <h3>Comments:</h3>
+    {{#each concept.comments as |comment|}}
+      <div class="card">
+        <h6> Comment added {{comment.createdAt}} by {{comment.creator.username}} </h6>
+        <p>{{comment.comment}} </p>
+      </div>
+    {{/each}}
+    <form class="form create-form">
+      <div class="form-group">
+        <label>Add Comment:</label>
+        <textarea class="form-input" type="text" id="user-username" rows="2">{{user.username}}</textarea>
+      </div>
+    </form>
     <button id="new-comment" class="btn btn-primary">Post Comment</button>
-  </form>
+  </div>
 </div>
 
 <script>
@@ -35,8 +48,8 @@
             alert('Could not post data');
         }
     }
-};
-document
+  };
+  document
     .querySelector('.new-comment')
     .addEventListener('submit', addCommentFormHandler);
 </script>

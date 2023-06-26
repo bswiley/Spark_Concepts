@@ -6,8 +6,27 @@ const { Op } = require('sequelize')
 // const getUser = require("../utils/userid");
 
 router.get('/', withAuth, async (req, res) => {
+  var category = ["metalwork", "software", "woodwork", "quilts"];
+  var user;
+
+  if (req.query.category){
+    category = req.query.category;
+  }
   try {
     const conceptData = await Concept.findAll({
+      where: {
+        'categories': category,
+        [Op.or]: [
+          {
+            'public': true,
+          },
+          {
+            'user_id': req.session.user_id,
+            'public': false
+          }
+        ],
+    },
+    order: [['date_created','DESC']],
       include: [
         {
           model: User,
@@ -113,8 +132,19 @@ router.get('/myuser/', withAuth, async (req, res) => {
     const userData = await User.findOne({ where: { id: req.session.user_id}, attributes: {exclude: ["password"]} })
 
     const user = userData.get({ plain: true });
+
+    const conceptData = await Concept.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+    });
+
+    const concepts = conceptData.map((concept) => concept.get({ plain: true }));
+
     console.log(user)
-    res.render('user', {user, logged_in: req.session.logged_in,});
+    console.log(concepts)
+    
+    res.render('user', {user, concepts, logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'An error occurred' });
@@ -125,13 +155,24 @@ router.get('/user', withAuth, async (req, res) => {
   res.render('user-search', {logged_in: req.session.logged_in,});
 });
 
-router.get('/user/:id', withAuth, async (req, res) => {
+router.get('/user/:username', withAuth, async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { id: req.params.id}, attributes: {exclude: ["password"]} })
+    const userData = await User.findOne({ where: { username: req.params.username}, attributes: {exclude: ["password"]} })
 
     const user = userData.get({ plain: true });
+
+    const conceptData = await Concept.findAll({
+      where: {
+        user_id: userData.id,
+        public: true
+      },
+    });
+
+    const concepts = conceptData.map((concept) => concept.get({ plain: true }));
+
     console.log(user)
-    res.render('user', {user, logged_in: req.session.logged_in,});
+    console.log(concepts)
+    res.render('user', {user, concepts, logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
     res.render('user-search', {logged_in: req.session.logged_in,});
