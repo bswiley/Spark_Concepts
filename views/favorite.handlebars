@@ -1,0 +1,33 @@
+<!--This is our navigation bar, this ought to change the way our page works -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="/css/jass.css">
+</head>
+
+
+
+
+<div class="row align-center mb-5">
+    <div>
+        <h2>Share Your Sparks!</h2>
+    </div>
+    <nav></nav>
+</div>
+
+
+<div class="row align-center mb-5">
+  <!--Is our Menu for selection here? -->
+  {{#each favoriteConcepts as |concept|}}
+    <a href="./spark/{{concept.id}}">
+      <div class="card">
+          <h3 class="card-title">{{concept.title}}<h3>
+          <h3 class="card-user">{{concept.creator.username}}</h3>
+          <p class="card-body">
+              {{concept.description}}
+          </p>
+      </div>
+    </a>
+  {{/each}}
+</div>

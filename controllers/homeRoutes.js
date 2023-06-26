@@ -6,44 +6,24 @@ const { Op } = require('sequelize')
 // const getUser = require("../utils/userid");
 
 router.get('/', withAuth, async (req, res) => {
-  var category = ["metalwork", "software", "woodwork", "quilts"];
-  var user;
-
-  if (req.query.category){
-    category = req.query.category;
-  }
   try {
     const conceptData = await Concept.findAll({
-      where: {
-        'categories': category,
-        [Op.or]: [
-          {
-            'public': true,
-          },
-          {
-            'user_id': req.session.user_id,
-            'public': false
-          }
-        ],
-    },
-    order: [['date_created','DESC']],
-    include: [
-      {
-        model: User,
-        attributes: ['username'],
-        as: 'creator'
-      },
-    ],
-  });
-
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+          as: 'creator',
+        },
+      ],
+    });
 
     const concepts = conceptData.map((concept) => concept.get({ plain: true }));
     console.log(concepts);
     console.log("here2");
-    res.
-    // status(200).json(concepts);
-     render('home', {
+
+    res.render('home', {
       concepts,
+      layout: 'main',
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -85,25 +65,46 @@ router.get('/spark/:id', withAuth, async (req, res) => {
 router.get('/fav', withAuth, async (req, res) => {
   try {
     console.log(req.session.user_id);
-    const favData =  await Favorite.findAll({
+    const favData = await Favorite.findAll({
       where: {
         user_id: req.session.user_id
       },
       include: [
         {
-          model: Concept, 
-          include: [User],
-          as: 'favoritedBy'
+          model: Concept,
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+              as: 'creator',
+            },
+            {
+              model: Comment,
+              include: [
+                {
+                  model: User,
+                  attributes: ['username'],
+                  as: 'creator',
+                }
+              ],
+            },
+          ],
+          as: 'favoritedConcept',
         }
       ]
-    })
+    });
+
     const favorites = favData.map(favorite => favorite.get({ plain: true }));
     console.log(favorites);
-    res.status(200).json(favorites);
+    res.render('favorite', {
+      favorites,
+      layout: 'main',
+      logged_in: req.session.logged_in
+    });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "An error occurred" });
+    res.status(500).json({ error: err.message });
   }
 });
 
