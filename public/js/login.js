@@ -6,7 +6,6 @@ const loginFormHandler = async (event) => {
 
 //NEED API/USERS/LOGIN
 //We currently have seeds/userdata.json
-
   if (email && password) {
     const response = await fetch('/api/users/login', {
       method: 'POST',
@@ -30,7 +29,10 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
-  if (username && email && password) {
+  if(password.length < 8){
+    alert('Password is too short');
+  }
+  else if (username && email && password) {
     const response = await fetch('/api/users/signup', {
       method: 'POST',
       body: JSON.stringify({ username, email, password }),
