@@ -121,7 +121,7 @@ router.get('/myuser/', withAuth, async (req, res) => {
 });
 
 router.get('/user', withAuth, async (req, res) => {
-  res.render('user-search');
+  res.render('user-search', {logged_in: req.session.logged_in,});
 });
 
 router.get('/user/:id', withAuth, async (req, res) => {
@@ -133,7 +133,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
     res.render('user', {user, logged_in: req.session.logged_in,});
   } catch (err) {
     console.error(err);
-    res.render('user-search');
+    res.render('user-search', {logged_in: req.session.logged_in,});
   }
 });
 

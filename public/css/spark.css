@@ -10,13 +10,14 @@
     --background: #B2beb5;
 }
 
-.navbar {
+.topnavbar {
     overflow: hidden;
     background-color: #333;
     width: 100%;
+    flex-wrap: nowrap;
 }
 
-.navbar a {
+.topnavbar a {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -31,7 +32,7 @@
     color: white;
 }
 
-.navbar .icon {
+.topnavbar .icon {
     display: none;
 }
 
@@ -69,7 +70,7 @@
     text-align: left;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.topnavbar a:hover, .dropdown:hover .dropbtn {
     background-color: #555;
 }
 
@@ -125,30 +126,30 @@
  */
 
 @media screen and (max-width: 800px) {
-    .navbar a:not(.keep), .dropdown .dropbtn {
+    .topnavbar a:not(.keep), .dropdown .dropbtn {
       display: none;
     }
-    .navbar a.icon {
+    .topnavbar a.icon {
       float: right;
       display: block;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .navbar.responsive {position: relative;}
-    .navbar.responsive .icon {
+    .topnavbar.responsive {position: relative;}
+    .topnavbar.responsive .icon {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .navbar.responsive a {
+    .topnavbar.responsive a {
       float: none;
       display: block;
       text-align: left;
     }
-    .navbar.responsive .dropdown {float: none;}
-    .navbar.responsive .dropdown-content {position: relative;}
-    .navbar.responsive .dropdown .dropbtn {
+    .topnavbar.responsive .dropdown {float: none;}
+    .topnavbar.responsive .dropdown-content {position: relative;}
+    .topnavbar.responsive .dropdown .dropbtn {
       display: block;
       width: 100%;
       text-align: left;

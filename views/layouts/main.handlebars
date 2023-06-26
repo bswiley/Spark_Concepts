@@ -12,10 +12,10 @@
 </head>
 
 <body>
-  <header class="display-flex justify-space-between align-center p-2">
+  <header class="justify-space-between align-center p-2">
     <!-- Only display the logout button if the user is logged in -->
     {{#if logged_in}}
-    <div class="navbar" id="topnavbar">
+    <div class="topnavbar" id="topnavbar">
       <a class="keep" href="/">Home</a>
       <a class="keep" href="/about">About</a>
       <a href="/myuser">My Information  </a>
@@ -45,10 +45,10 @@
 <script>
 function myFunction() {
   var x = document.getElementById("topnavbar");
-  if (x.className === "navbar") {
+  if (x.className === "topnavbar") {
     x.className += " responsive";
   } else {
-    x.className = "navbar";
+    x.className = "topnavbar";
   }
 }
 </script>
