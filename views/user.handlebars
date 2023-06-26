@@ -1,17 +1,56 @@
 <div class="row align-center mb-5">
     <div>
-        <p>{{user.username}}'s Profile</p>
+        <h1>{{user.username}}'s Profile</h1>
     </div>
-    <nav>
-      <button class="btn" id="My Sparks">My Sparks</button>
-      <button class="btn" id="My Favorites">My Favorites</button>
 </div>
 
-<div class="row align-center mb-5">
-    <p>{{user.bio}}</p>
-    <br>
-    <p>{{user.link}}</p>
-    <button class="btn" id="Delete User">Delete User</button>
+<form class="form create-form">
+    <div class="form-group">
+        <label for="Email">Username:</label>
+        <textarea class="form-input" type="text" id="user-username">{{user.username}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <textarea class="form-input" type="text" id="user-email">{{user.email}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="Bio">Bio:</label>
+        <textarea class="form-input" type="text" id="user-bio">{{user.bio}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="User-Link">User Link:</label>
+        <textarea class="form-input" type="text" id="user-link">{{user.link}}</textarea>
+    </div>
+</form>
+
+<div class="form-group">
+    <button class="btn create" id ="updateUser" type="button">Update User</button>
 </div>
 
-<script src="/js/login.js"></script>
+<script>
+    const updateUser = async (event) => {
+        console.log(`triggered add comment form handler`)
+        event.preventDefault();
+
+        const username = document.querySelector('#user-username').value.trim();
+        const email = document.querySelector('#user-email').value.trim();
+        const bio = document.querySelector('#user-bio').value.trim();
+        const link = document.querySelector('#user-link').value.trim();
+        
+        const response = await fetch('/api/users/' + {{user.id}}, {
+            method: 'PUT',
+            body: JSON.stringify({ username, email, bio, link}),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        console.log(response)
+        if (response.ok) {
+            document.location.replace('/myuser');
+        } else {
+            alert('Could not post data');
+        }
+        
+    };
+    document
+        .querySelector('#updateUser')
+        .addEventListener('click', updateUser);
+</script>

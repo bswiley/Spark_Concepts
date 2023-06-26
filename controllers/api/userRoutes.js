@@ -35,13 +35,15 @@ router.get('/:username', async (req, res) => {
 /**
  * Update a username
  */
-router.put('/:username', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
+  console.log("in put username for updating " + req.params.id)
   try {
-    if(req.params.username != req.session.user_name){
+    /*if(req.params.id != req.session.user_id){
       res.status(403).json("you are not authorized");
       return;
-    }
-    const userData = await User.findOne({ where: { username: req.params.username}});
+    } */
+    console.log("starting await");
+    const userData = await User.findOne({ where: { id: req.params.id}});
     await userData.update(req.body);
     res.status(204).json("data posted");
   } catch (err) {
