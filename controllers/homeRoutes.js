@@ -185,4 +185,8 @@ router.get('/create', withAuth, async (req, res) => {
   res.render("create", {logged_in: req.session.logged_in});
 });
 
+router.get('/about', withAuth, async (req, res) => {
+  res.render("about", {logged_in: req.session.logged_in});
+});
+
 module.exports = router;

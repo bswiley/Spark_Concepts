@@ -8,6 +8,8 @@
     --light: #129cd8;
     /* background color */
     --background: #B2beb5;
+    /* Color for Text */
+    --text: black;
 }
 
 .topnavbar {
@@ -84,6 +86,8 @@
 }
 .card {
     /* Add shadows to create the "card" effect */
+    color: var(--text);
+    display: block;
     width: auto;
     min-width: 50%;
     margin: 0;
@@ -111,8 +115,7 @@
 }
 
 .contentBox{
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     position: relative;
 
     height: auto;
