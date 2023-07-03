@@ -12,10 +12,12 @@ router.post('/concept', withAuth, async (req, res) => {
     console.log(`outsideLink = ${req.body.outsideLink}`);
     console.log(`ChatLink = ${req.body.ChatLink}`);
     console.log(`categories = ${req.body.categories}`);
+    let text = req.body.text;
+    let reformatedText = text.replace(/\n/g, "<br>");
 
     const conceptData = await Concept.create({
       "title": req.body.title,
-      "text": req.body.text,
+      "text": reformatedText,
       "user_id": req.session.user_id,
       "public": req.body.public,
       "outsideLink": req.body.outsideLink,

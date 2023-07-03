@@ -27,8 +27,8 @@ const makeQueryHandler = async (event) => {
     });
     if (response.ok) {
         let responseData = await response.text();
-        let reformatedResponse = responseData.replace("\n", "<br>")
-        document.querySelector('#spark-text').value = reformatedResponse
+        let reformatedResponse = responseData.replace(/\\n/g, "\n");
+        document.querySelector('#spark-text').value = reformatedResponse;
     } else {
         alert('Could not get data');
     }
